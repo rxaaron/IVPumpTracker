@@ -1,0 +1,27 @@
+body{
+    background:#f2f2f2;
+}
+
+table{
+  border-collapse:collapse;
+  table-layout:fixed;
+  text-align:center;
+}
+
+td{
+  font-size:2em;
+  border:1px solid gray;
+  padding:15px;
+  width:150px;
+  height:100px;
+}
+
+table, th{
+  border:3px solid gray;
+}
+
+th{
+  background: black;
+  color:white;
+  font-size:2em;
+}
