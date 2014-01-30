@@ -28,8 +28,21 @@ function Drop(event){
     //set both boxes to spinning icons.
     //then ajax both id's to store data in database
     //THEN set the boxes to the new status.
-    document.getElementById(data).innerHTML='';
-    event.target.innerHTML=text;
+    if(MoveThatPump(event.target.id,data)==="OK"){
+        document.getElementById(data).innerHTML='';
+        event.target.innerHTML=text;
+    }else{
+        alert("Data transfer failed.  Please try again.");
+    }
   }
     event.preventDefault();
+};
+
+function MoveThatPump(to,from){
+    var xmlhttp;
+    xmlhttp = new XMLHttpRequest();  
+    xmlhttp.open("POST","scripts/move_pump.php",false);
+    xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    xmlhttp.send("moveto="+to+"&movefrom="+from);
+    return xmlhttp.responseText;
 };
