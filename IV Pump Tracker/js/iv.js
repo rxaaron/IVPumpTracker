@@ -1,13 +1,28 @@
 AddListeners();
 
 function AddListeners(){
-  var tds = document.getElementsByTagName('td');
-  for(var i = 0, length = tds.length; i < length; i++){
-    
-    tds[i].addEventListener('dragstart',Drag,false);
-    tds[i].addEventListener('drop',Drop,false);
-    tds[i].addEventListener('dragover',AllowDrop,false);
+  DragDropEvents();
+  document.getElementById('refreshbtn').addEventListener('click',RefreshTable,false);
+};
+
+function DragDropEvents(){
+    var tds = document.getElementsByTagName('td');
+    for(var i = 0, length = tds.length; i < length; i++){
+        tds[i].addEventListener('dragstart',Drag,false);
+        tds[i].addEventListener('drop',Drop,false);
+        tds[i].addEventListener('dragover',AllowDrop,false);
   }
+};
+
+function RefreshTable(event){
+    var xmlhttp;
+    xmlhttp = new XMLHttpRequest();  
+    xmlhttp.open("POST","scripts/location_list.php",false);
+    xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    xmlhttp.send();
+    document.getElementById('locationtable').innerHTML= xmlhttp.responseText;
+    DragDropEvents();
+    event.preventDefault();
 };
 
 function AllowDrop(event){
